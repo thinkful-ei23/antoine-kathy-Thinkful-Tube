@@ -38,7 +38,7 @@ const fetchVideos = function(searchTerm, callback) {
   $.getJSON(BASE_URL, query, callback);
 };
 
-fetchVideos('cats', response => console.log(response));
+// fetchVideos('cats', response => console.log(response));
 
 // TASK:
 // 1. Create a `decorateResponse` function that receives the Youtube API response
@@ -58,14 +58,16 @@ const decorateResponse = function(response) {
   });
   return results;
 };
-fetchVideos('cats', decorateResponse);
 
 // TASK:
 // 1. Create a `generateVideoItemHtml` function that receives the decorated object
 // 2. Using the object, return an HTML string containing all the expected data
 // TEST IT!
 const generateVideoItemHtml = function(video) {
-
+  return `<li data-video-id="${video.id}">
+          <h3>${video.title}</h3>
+          <img src="${video.thumbnail}"/>
+          </li>`;
 };
 
 // TASK:
@@ -73,7 +75,8 @@ const generateVideoItemHtml = function(video) {
 // objects and sets the array as the value held in store.videos
 // TEST IT!
 const addVideosToStore = function(videos) {
-
+  store.videos = videos;
+  render();
 };
 
 // TASK:
@@ -82,7 +85,8 @@ const addVideosToStore = function(videos) {
 // 3. Add your array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-
+  const html = store.videos.map(video => generateVideoItemHtml(video));
+  $('.results').html(html)
 };
 
 // TASK:
@@ -97,7 +101,7 @@ const render = function() {
 //   g) Inside the callback, run the `render` function 
 // TEST IT!
 const handleFormSubmit = function() {
-
+  $()
 };
 
 // When DOM is ready:
