@@ -1,6 +1,6 @@
 
 /* global $ */
-'use strict'
+'use strict';
 
 
 const API_KEY = 'YOUR_KEY_HERE';
@@ -35,11 +35,11 @@ const fetchVideos = function(searchTerm, callback) {
     part: 'snippet',
     q: `${searchTerm}`,
     key: 'AIzaSyCg6x00s-dGYOptkvgVMBwepjRlsqXBfCI'
-  }
+  };
   $.getJSON(BASE_URL, query, callback);
 };
 
-fetchVideos('cats', response => console.log(response));
+// fetchVideos('cats', response => console.log(response));
 
 // TASK:
 // 1. Create a `decorateResponse` function that receives the Youtube API response
@@ -50,7 +50,14 @@ fetchVideos('cats', response => console.log(response));
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-
+  const results = response.items.map(function(item) {    
+    return {
+      id: item.id.videoId,
+      title: item.snippet.title,
+      thumbnail: item.snippet.thumbnails.default.url 
+    };
+  });
+  return results;
 };
 
 // TASK:
@@ -58,7 +65,10 @@ const decorateResponse = function(response) {
 // 2. Using the object, return an HTML string containing all the expected data
 // TEST IT!
 const generateVideoItemHtml = function(video) {
-
+  return `<li data-video-id="${video.id}">
+          <h3>${video.title}</h3>
+          <img src="${video.thumbnail}"/>
+          </li>`;
 };
 
 // TASK:
@@ -66,7 +76,8 @@ const generateVideoItemHtml = function(video) {
 // objects and sets the array as the value held in store.videos
 // TEST IT!
 const addVideosToStore = function(videos) {
-
+  store.videos = videos;
+  render();
 };
 
 // TASK:
@@ -75,7 +86,8 @@ const addVideosToStore = function(videos) {
 // 3. Add your array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-
+  const html = store.videos.map(video => generateVideoItemHtml(video));
+  $('.results').html(html)
 };
 
 // TASK:
@@ -90,7 +102,7 @@ const render = function() {
 //   g) Inside the callback, run the `render` function
 // TEST IT!
 const handleFormSubmit = function() {
-
+  $()
 };
 
 // When DOM is ready:
