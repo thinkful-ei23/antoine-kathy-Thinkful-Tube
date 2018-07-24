@@ -1,10 +1,13 @@
+'use strict';
+/* global $ */
+
 const API_KEY = 'YOUR_KEY_HERE';
 
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
   have been transformed into just the necessary data to display on our page, compared to the large
   dataset Youtube will deliver to us.  Example object:
-  
+
   {
     id: '98ds8fbsdy67',
     title: 'Cats dancing the Macarena',
@@ -32,8 +35,8 @@ const fetchVideos = function(searchTerm, callback) {
 // TASK:
 // 1. Create a `decorateResponse` function that receives the Youtube API response
 // 2. Map through the response object's `items` array
-// 3. Return an array of objects, where each object contains the keys `id`, `title`, 
-// `thumbnail` which each hold the appropriate values from the API item object. You 
+// 3. Return an array of objects, where each object contains the keys `id`, `title`,
+// `thumbnail` which each hold the appropriate values from the API item object. You
 // WILL have to dig into several nested properties!
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
@@ -50,7 +53,7 @@ const generateVideoItemHtml = function(video) {
 };
 
 // TASK:
-// 1. Create a `addVideosToStore` function that receives an array of decorated video 
+// 1. Create a `addVideosToStore` function that receives an array of decorated video
 // objects and sets the array as the value held in store.videos
 // TEST IT!
 const addVideosToStore = function(videos) {
@@ -75,7 +78,7 @@ const render = function() {
 //   d) Invoke the `fetchVideos` function, sending in the search value
 //   e) Inside the callback, send the API response through the `decorateResponse` function
 //   f) Inside the callback, add the decorated response into your store using the `addVideosToStore` function
-//   g) Inside the callback, run the `render` function 
+//   g) Inside the callback, run the `render` function
 // TEST IT!
 const handleFormSubmit = function() {
 
