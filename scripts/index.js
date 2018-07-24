@@ -58,7 +58,11 @@ const decorateResponse = function(response) {
   });
   return results;
 };
-
+fetchVideos('cats', response => {
+  decorateResponse(response);
+  addVideosToStore(response);
+  render();
+})
 // TASK:
 // 1. Create a `generateVideoItemHtml` function that receives the decorated object
 // 2. Using the object, return an HTML string containing all the expected data
