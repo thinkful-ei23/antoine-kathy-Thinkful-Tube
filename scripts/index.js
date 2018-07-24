@@ -1,9 +1,9 @@
 
 /* global $ */
 'use strict';
+console.log('hello')
 
-
-const API_KEY = 'YOUR_KEY_HERE';
+const API_KEY = 'AIzaSyCg6x00s-dGYOptkvgVMBwepjRlsqXBfCI';
 
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
@@ -34,7 +34,7 @@ const fetchVideos = function(searchTerm, callback) {
   const query = {
     part: 'snippet',
     q: `${searchTerm}`,
-    key: 'AIzaSyCg6x00s-dGYOptkvgVMBwepjRlsqXBfCI'
+    key: API_KEY
   };
   $.getJSON(BASE_URL, query, callback);
 };
@@ -59,11 +59,7 @@ const decorateResponse = function(response) {
   });
   return results;
 };
-fetchVideos('cats', response => {
-  decorateResponse(response);
-  addVideosToStore(response);
-  render();
-})
+
 // TASK:
 // 1. Create a `generateVideoItemHtml` function that receives the decorated object
 // 2. Using the object, return an HTML string containing all the expected data
@@ -106,8 +102,8 @@ const render = function() {
 //   g) Inside the callback, run the `render` function
 // TEST IT!
 const handleFormSubmit = function() {
-  $('form').on('submit', function(event) {
-    event.preventDefault;
+  $('form').on('submit',function(event) {
+    event.preventDefault();
     let searchVideo = $('#search-term').val();
     $('#search-term').val('');
     fetchVideos(searchVideo, (function(response) {
