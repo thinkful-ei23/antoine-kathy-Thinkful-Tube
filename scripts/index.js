@@ -1,7 +1,6 @@
 
 /* global $ */
 'use strict';
-console.log('Hi from lunar moonscape');
 
 const API_KEY =  'AIzaSyB6V8YdgwiHrm2ExNqw8MvuMF35GCLk8B8';
 
@@ -107,8 +106,7 @@ const handleFormSubmit = function() {
     let searchVideo = $('#search-term').val();
     $('#search-term').val('');
     fetchVideos(searchVideo, (function(response) {
-      decorateResponse(response);
-      addVideosToStore(decorateResponse());
+      addVideosToStore(decorateResponse(response));
       render();
     }));
   });
