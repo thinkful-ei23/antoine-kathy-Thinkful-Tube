@@ -1,9 +1,9 @@
 
 /* global $ */
 'use strict';
-console.log('hello')
 
 const API_KEY = 'AIzaSyCg6x00s-dGYOptkvgVMBwepjRlsqXBfCI';
+
 
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
@@ -39,7 +39,7 @@ const fetchVideos = function(searchTerm, callback) {
   $.getJSON(BASE_URL, query, callback);
 };
 
-// fetchVideos('cats', response => console.log(response));
+
 
 // TASK:
 // 1. Create a `decorateResponse` function that receives the Youtube API response
@@ -50,15 +50,16 @@ const fetchVideos = function(searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-  const results = response.items.map(function(item) {
+  console.log(response)
+  return response.items.map(function(item) {
     return {
       id: item.id.videoId,
       title: item.snippet.title,
       thumbnail: item.snippet.thumbnails.default.url
     };
   });
-  return results;
 };
+
 
 // TASK:
 // 1. Create a `generateVideoItemHtml` function that receives the decorated object
@@ -102,13 +103,12 @@ const render = function() {
 //   g) Inside the callback, run the `render` function
 // TEST IT!
 const handleFormSubmit = function() {
-  $('form').on('submit',function(event) {
+  $('form').on('submit', function(event) {
     event.preventDefault();
     let searchVideo = $('#search-term').val();
     $('#search-term').val('');
     fetchVideos(searchVideo, (function(response) {
-      decorateResponse(response);
-      addVideosToStore(decorateResponse());
+      addVideosToStore(decorateResponse(response));
       render();
     }));
   });
