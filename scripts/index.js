@@ -1,5 +1,5 @@
 /* global $ */
-'use strict'
+'use strict';
 
 
 const API_KEY = 'YOUR_KEY_HERE';
@@ -34,7 +34,7 @@ const fetchVideos = function(searchTerm, callback) {
     part: 'snippet',
     q: `${searchTerm}`,
     key: 'AIzaSyCg6x00s-dGYOptkvgVMBwepjRlsqXBfCI'
-  }
+  };
   $.getJSON(BASE_URL, query, callback);
 };
 
@@ -49,8 +49,16 @@ fetchVideos('cats', response => console.log(response));
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-
+  const results = response.items.map(function(item) {    
+    return {
+      id: item.id.videoId,
+      title: item.snippet.title,
+      thumbnail: item.snippet.thumbnails.default.url 
+    };
+  });
+  return results;
 };
+fetchVideos('cats', decorateResponse);
 
 // TASK:
 // 1. Create a `generateVideoItemHtml` function that receives the decorated object
