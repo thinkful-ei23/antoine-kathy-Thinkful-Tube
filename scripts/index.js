@@ -17,9 +17,16 @@ const API_KEY = 'AIzaSyCg6x00s-dGYOptkvgVMBwepjRlsqXBfCI';
   }
 
 */
-const store = {
-  videos: []
-};
+const store = (function() {
+
+ let videos = []
+
+  return {
+    videos
+  }
+
+}()
+);
 
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
