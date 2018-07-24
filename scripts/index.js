@@ -1,3 +1,4 @@
+
 /* global $ */
 'use strict';
 
@@ -8,7 +9,7 @@ const API_KEY = 'YOUR_KEY_HERE';
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
   have been transformed into just the necessary data to display on our page, compared to the large
   dataset Youtube will deliver to us.  Example object:
-  
+
   {
     id: '98ds8fbsdy67',
     title: 'Cats dancing the Macarena',
@@ -43,17 +44,17 @@ const fetchVideos = function(searchTerm, callback) {
 // TASK:
 // 1. Create a `decorateResponse` function that receives the Youtube API response
 // 2. Map through the response object's `items` array
-// 3. Return an array of objects, where each object contains the keys `id`, `title`, 
-// `thumbnail` which each hold the appropriate values from the API item object. You 
+// 3. Return an array of objects, where each object contains the keys `id`, `title`,
+// `thumbnail` which each hold the appropriate values from the API item object. You
 // WILL have to dig into several nested properties!
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-  const results = response.items.map(function(item) {    
+  const results = response.items.map(function(item) {
     return {
       id: item.id.videoId,
       title: item.snippet.title,
-      thumbnail: item.snippet.thumbnails.default.url 
+      thumbnail: item.snippet.thumbnails.default.url
     };
   });
   return results;
@@ -75,7 +76,7 @@ const generateVideoItemHtml = function(video) {
 };
 
 // TASK:
-// 1. Create a `addVideosToStore` function that receives an array of decorated video 
+// 1. Create a `addVideosToStore` function that receives an array of decorated video
 // objects and sets the array as the value held in store.videos
 // TEST IT!
 const addVideosToStore = function(videos) {
@@ -90,7 +91,7 @@ const addVideosToStore = function(videos) {
 // TEST IT!
 const render = function() {
   const html = store.videos.map(video => generateVideoItemHtml(video));
-  $('.results').html(html)
+  $('.results').html(html);
 };
 
 // TASK:
@@ -102,14 +103,24 @@ const render = function() {
 //   d) Invoke the `fetchVideos` function, sending in the search value
 //   e) Inside the callback, send the API response through the `decorateResponse` function
 //   f) Inside the callback, add the decorated response into your store using the `addVideosToStore` function
-//   g) Inside the callback, run the `render` function 
+//   g) Inside the callback, run the `render` function
 // TEST IT!
 const handleFormSubmit = function() {
-  $()
+  $('form').on('submit', function(event) {
+    event.preventDefault;
+    let searchVideo = $('#search-term').val();
+    $('#search-term').val('');
+    fetchVideos(searchVideo, (function(response) {
+      decorateResponse(response);
+      addVideosToStore(decorateResponse());
+      render();
+    }));
+  });
 };
 
 // When DOM is ready:
 $(function () {
   // TASK:
   // 1. Run `handleFormSubmit` to bind the event listener to the DOM
+  handleFormSubmit();
 });
