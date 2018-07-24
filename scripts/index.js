@@ -16,27 +16,17 @@ const API_KEY =  'AIzaSyB6V8YdgwiHrm2ExNqw8MvuMF35GCLk8B8';
   }
 
 */
-const store = {
-  videos: []
-};
+
 
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
-const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 // TASK:
 // 1. Create a `fetchVideos` function that receives a `searchTerm` and `callback`
 // 2. Use `searchTerm` to construct the right query object based on the Youtube API docs
 // 3. Make a getJSON call using the query object and sending the provided callback in as the last argument
 // TEST IT! Execute this function and console log the results inside the callback.
-const fetchVideos = function(searchTerm, callback) {
-  const query = {
-    part: 'snippet',
-    q: `${searchTerm}`,
-    key: API_KEY
-  };
-  $.getJSON(BASE_URL, query, callback);
-};
+
 
 // fetchVideos('cats', response => console.log(response));
 
