@@ -1,9 +1,9 @@
 
 /* global $ */
 'use strict';
+console.log('Hi from lunar moonscape');
 
-
-const API_KEY = 'YOUR_KEY_HERE';
+const API_KEY =  'AIzaSyB6V8YdgwiHrm2ExNqw8MvuMF35GCLk8B8';
 
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
@@ -34,7 +34,7 @@ const fetchVideos = function(searchTerm, callback) {
   const query = {
     part: 'snippet',
     q: `${searchTerm}`,
-    key: 'AIzaSyCg6x00s-dGYOptkvgVMBwepjRlsqXBfCI'
+    key: API_KEY
   };
   $.getJSON(BASE_URL, query, callback);
 };
@@ -103,7 +103,7 @@ const render = function() {
 // TEST IT!
 const handleFormSubmit = function() {
   $('form').on('submit', function(event) {
-    event.preventDefault;
+    event.preventDefault();
     let searchVideo = $('#search-term').val();
     $('#search-term').val('');
     fetchVideos(searchVideo, (function(response) {
